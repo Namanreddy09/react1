@@ -1,25 +1,30 @@
-import React from 'react';
-import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
-import LoginPage from './LoginPage';
-import ProductCataloguePage from './ProductCataloguePage';
-import './studies.css'; // Import external CSS file
+import React, { useState } from "react";
+import { BrowserRouter as Router, Routes, Route, useNavigate } from "react-router-dom";
+import LoginPage from "./pages/LoginPage";
+import ProductCataloguePage from "./pages/ProductCataloguePage";
+import CartPage from "./pages/CartPage";
+import PaymentPage from "./pages/PaymentPage";
+import "./App.css";
 
 function App() {
+  const [cart, setCart] = useState([]);
+
+  const addToCart = (product) => {
+    setCart([...cart, product]);
+  };
+
+  const removeFromCart = (id) => {
+    setCart(cart.filter((item) => item.id !== id));
+  };
+
   return (
     <Router>
-      <div className="App">
-        <nav>
-          <ul>
-            <li><Link to="/">Login</Link></li>
-            <li><Link to="/catalogue">Product Catalogue</Link></li>
-          </ul>
-        </nav>
-
-        <Routes>
-          <Route path="/" element={<LoginPage />} />
-          <Route path="/catalogue" element={<ProductCataloguePage />} />
-        </Routes>
-      </div>
+      <Routes>
+        <Route path="/" element={<LoginPage />} />
+        <Route path="/catalogue" element={<ProductCataloguePage cart={cart} addToCart={addToCart} />} />
+        <Route path="/cart" element={<CartPage cart={cart} removeFromCart={removeFromCart} />} />
+        <Route path="/payment" element={<PaymentPage setCart={setCart} />} />
+      </Routes>
     </Router>
   );
 }
