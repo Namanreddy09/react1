@@ -1,0 +1,95 @@
+/* Global Styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Arial", sans-serif;
+  background-color: #f8f9fa;
+  color: #333;
+  line-height: 1.6;
+}
+
+/* Navigation Bar */
+nav {
+  background: #4fd3bf;
+  padding: 15px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+nav ul {
+  list-style: none;
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+}
+
+nav ul li {
+  display: inline;
+}
+
+nav ul li a {
+  color: white;
+  text-decoration: none;
+  font-size: 18px;
+  font-weight: bold;
+  padding: 8px 12px;
+  transition: background 0.3s ease-in-out;
+  border-radius: 5px;
+}
+
+nav ul li a:hover {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+/* Page Container */
+.container {
+  max-width: 800px;
+  margin: 40px auto;
+  padding: 20px;
+  text-align: center;
+  background: white;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+}
+
+/* Page Titles */
+.container h1 {
+  font-size: 32px;
+  color: #27e99f;
+  margin-bottom: 10px;
+}
+
+/* Page Text */
+.container p {
+  font-size: 18px;
+  color: #555;
+}
+
+/* Post Loading State */
+.loading {
+  text-align: center;
+  font-size: 20px;
+  font-weight: bold;
+  color: #0eea71;
+  margin-top: 50px;
+}
+
+/* Not Found Page */
+.notfound h1 {
+  color: red;
+}
+
+/* Responsive Design */
+@media (max-width: 600px) {
+  nav ul {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .container {
+    width: 90%;
+  }
+}
