@@ -1,0 +1,141 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
+
+:root {
+  /* Light Mode Colors */
+  --light-bg: #ffffff;
+  --light-text: #222;
+  --light-card: rgba(0, 0, 0, 0.05);
+
+  /* Dark Mode Colors */
+  --dark-bg: #121212;
+  --dark-text: #f4f4f4;
+  --dark-card: rgba(255, 255, 255, 0.1);
+
+  /* Button Colors */
+  --primary: #ff9800;
+  --danger: #f44336;
+  --success: #4caf50;
+}
+
+body {
+  font-family: 'Poppins', sans-serif;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: var(--light-bg);
+  color: var(--light-text);
+  transition: background 0.3s ease-in-out, color 0.3s ease-in-out;
+}
+
+/* Dark Mode */
+body.dark-mode {
+  background-color: var(--dark-bg);
+  color: var(--dark-text);
+}
+
+/* Container */
+.container {
+  text-align: center;
+  padding: 40px;
+  border-radius: 16px;
+  background: var(--light-card);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  transition: background 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+  width: 90%;
+  max-width: 400px;
+}
+
+/* Dark Mode Styles */
+.dark-mode .container {
+  background: var(--dark-card);
+  box-shadow: 0 10px 30px rgba(255, 255, 255, 0.2);
+}
+
+/* Stylish Stopwatch Heading (Visible in Light & Dark) */
+.title {
+  font-size: 2.5rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: var(--light-text);
+}
+
+.dark-mode .title {
+  color: var(--dark-text);
+}
+
+/* Theme Toggle Button */
+.theme-toggle {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  background: transparent;
+  border: 2px solid currentColor;
+  color: var(--light-text);
+  font-size: 16px;
+  padding: 8px 14px;
+  cursor: pointer;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+}
+
+.dark-mode .theme-toggle {
+  color: var(--dark-text);
+}
+
+.theme-toggle:hover {
+  background: rgba(0, 0, 0, 0.1);
+}
+
+.dark-mode .theme-toggle:hover {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+/* Stopwatch Display */
+.stopwatch {
+  font-size: 3rem;
+  font-weight: 600;
+  margin-bottom: 20px;
+}
+
+/* Buttons */
+.buttons button {
+  font-size: 18px;
+  padding: 14px 24px;
+  margin: 10px;
+  border: none;
+  cursor: pointer;
+  border-radius: 8px;
+  transition: 0.3s ease;
+  font-weight: 600;
+  letter-spacing: 1px;
+  color: white;
+}
+
+.buttons button:first-child {
+  background: var(--primary);
+  box-shadow: 0 4px 10px rgba(255, 152, 0, 0.3);
+}
+
+.buttons button:nth-child(2) {
+  background: var(--danger);
+  box-shadow: 0 4px 10px rgba(244, 67, 54, 0.3);
+}
+
+.buttons button:last-child {
+  background: var(--success);
+  box-shadow: 0 4px 10px rgba(76, 175, 80, 0.3);
+}
+
+.buttons button:hover {
+  transform: scale(1.05);
+  filter: brightness(90%);
+}
+
+.buttons button:disabled {
+  background: #ccc;
+  cursor: not-allowed;
+  box-shadow: none;
+}
