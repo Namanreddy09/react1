@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState } from 'react'; 
 import { useNavigate } from 'react-router-dom';
 import '../App.css';
 import smartwatch from '../assets/smartwatch.jpg';
@@ -18,6 +18,11 @@ const Dashboard = () => {
   // ✅ Add to Cart
   const addToCart = (product) => {
     setCart([...cart, product]);
+  };
+
+  // ✅ Remove from Cart
+  const removeFromCart = (index) => {
+    setCart(cart.filter((_, i) => i !== index));
   };
 
   // ✅ Calculate Total Cart Value
@@ -60,7 +65,10 @@ const Dashboard = () => {
           <>
             <ul>
               {cart.map((item, index) => (
-                <li key={index}>{item.name} - ${item.price}</li>
+                <li key={index}>
+                  {item.name} - ${item.price} 
+                  <button onClick={() => removeFromCart(index)}>Remove</button>
+                </li>
               ))}
             </ul>
             <h4>Total: ${totalCartValue}</h4>
