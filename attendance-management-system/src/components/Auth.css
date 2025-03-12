@@ -1,0 +1,65 @@
+/* Auth Container */
+.auth-container {
+  max-width: 400px;
+  margin: 50px auto;
+  padding: 20px;
+  background: white;
+  border-radius: 10px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+
+/* Centering the Login/Signup Heading */
+.auth-container h2 {
+  color: #007bff;
+  text-align: center;
+  font-size: 24px;
+  margin-bottom: 15px;
+}
+
+/* Input Fields */
+.auth-container input {
+  width: 100%;
+  padding: 12px;
+  border: 2px solid #ccc;
+  border-radius: 8px;
+  font-size: 16px;
+  margin-bottom: 10px;
+  transition: 0.3s;
+}
+
+.auth-container input:focus {
+  border-color: #007bff;
+  outline: none;
+}
+
+/* Submit Button */
+.auth-container button {
+  background: #007bff;
+  color: white;
+  padding: 12px;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: 0.3s;
+  width: 100%;
+}
+
+.auth-container button:hover {
+  background: #0056b3;
+}
+
+/* Toggle Login/Signup Button */
+.auth-container .toggle-btn {
+  background: none;
+  border: none;
+  color: #007bff;
+  font-size: 14px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.auth-container .toggle-btn:hover {
+  text-decoration: underline;
+}
