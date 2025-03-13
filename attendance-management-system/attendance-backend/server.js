@@ -17,6 +17,7 @@ mongoose.connect(process.env.MONGO_URI || "mongodb://localhost:27017/attendanceD
 // Define Schema
 const attendanceSchema = new mongoose.Schema({
   user: String,
+  status: { type: String, enum: ["Present", "Absent"], default: "Present" },
   timestamp: { type: Date, default: Date.now },
 });
 
@@ -26,7 +27,27 @@ const Attendance = mongoose.model("Attendance", attendanceSchema);
 app.post("/attendance", async (req, res) => {
   try {
     const { user } = req.body;
-    const newAttendance = new Attendance({ user });
+    
+    if (!user) {
+      return res.status(400).json({ error: "User name is required" });
+    }
+
+    const startOfDay = new Date();
+    startOfDay.setHours(0, 0, 0, 0);
+
+    const endOfDay = new Date();
+    endOfDay.setHours(23, 59, 59, 999);
+
+    const existingRecord = await Attendance.findOne({
+      user,
+      timestamp: { $gte: startOfDay, $lte: endOfDay }
+    });
+
+    if (existingRecord) {
+      return res.status(400).json({ error: "You have already marked attendance today" });
+    }
+
+    const newAttendance = new Attendance({ user, status: "Present" });
     await newAttendance.save();
     res.status(201).json(newAttendance);
   } catch (error) {

@@ -1,4 +1,4 @@
-Project Description:
+####Project Description:
 
 The Attendance Management System allows users to mark attendance and view employee records. It interacts with an Employee API to fetch and store data in MongoDB. The system includes a Dashboard, an Attendance Page, and an Employee Records Page, all dynamically loading data from the API. 
 
@@ -6,111 +6,153 @@ The Attendance Management System allows users to mark attendance and view employ
 #### Level 0 (Context Diagram):
 At the highest level, the Attendance System processes user requests to mark attendance, view employee records, and access the dashboard.
 
-+-----------------------+
-|  External Entities    |
-|     - User            |
-+-----------------------+
-          |
-          v
-+-----------------------------------+
-|  Attendance System (1.0)          |
-|  (Handles Employee Data)          |
-+-----------------------------------+
-          |
-          v
-+----------------------------+
-| External API: Employee API |
-+----------------------------+
-          |
-          v
 +---------------------------+
-| Database: MongoDB         |
+|      External Entities    |
+|  - User                   |
 +---------------------------+
+          |
+          v
++--------------------------------------------+
+|  Attendance Management System (1.0)        |
+|  (Authentication & Employee Attendance)    |
++--------------------------------------------+
+          |             |              |
+          |             |              |
+          v             v              v
++----------------+  +----------------+  +----------------------------+
+|  Auth System  |  | Employee API   |  | Database: MongoDB           |
+|  (Login/Signup|  | (Attendance &  |  | (Stores Attendance &        |
+|  & Logout)    |  | Employee Data) |  |  User Credentials)          |
++----------------+  +----------------+  +----------------------------+
 
 
-Explanation:
+####Explanation:
 ●	External Entity (User):  The user interacts with the system to mark attendance, view employee records, or check the dashboard.
 ●	Process (Attendance System): The system loads relevant pages, interacts with the Employee API, and manages data in MongoDB.
 ●	External API (Employee API): The system fetches or updates employee attendance data via an API.
 ●	Database (MongoDB): The system stores employee attendance records in a database.
 ________________________________________
+
 #####Level 1 DFD (Decomposition of Process):
 Now, let's break down the Attendance Management System process (Process 1.0) into more detailed steps:
 
 ✔ Dashboard :
   • Displays Welcome page.
 
-✔ Mark Attendance:
+✔ Auth System :
+  • Handles user authentication (Login & Signup).
+  • Stores user credentials securely in MongoDB.
+  • Verifies identity before granting access to attendance features.
 
+✔ User Interaction
+  • Users can Sign Up (register new account).
+  • Users can Log In to access attendance features.
+  • Once authenticated, users can mark attendance and view records
+
+✔ Mark Attendance:
   • User marks attendance.
+  • if alrady marked attendance ,then it shows attendance already marked for today.
   • Data is sent to Employee API.
   • Employee API updates MongoDB.
-
 
 ✔ Employee Records:                                               
   • Loads employee attendance page.
   • Fetches attendance records from MongoDB via Employee API.
   • Displays records in the UI.
 
-+------------------------+       
-|    External Entity     |       
-|       (User)           |        
-+------------------------+       
-          |                                
-          v                                
-+----------------------------------+       
-| Process: 1.1 - Load Dashboard    |
-+----------------------------------+
+✔ Logout & Session Management:
+  • When the user logs out, their session/token is cleared.
+  • The system redirects them to the Login/Signup page
+
++---------------------------+
+|      External Entity      |
+|        (User)            |
++---------------------------+
           |
           v
-+----------------------------------+
-| Process: 1.2 - Fetch & Render   |
-|    Dashboard Data (API)         |
-+----------------------------------+
-          |                                
-          v                                
-+---------------------------------------+       
-| Process: 1.3 - Load Attendance Page   |
-+---------------------------------------+
++-------------------------------------+
+| Process 1.1 - User Authentication   |
+|  (Login / Signup)                   |
++-------------------------------------+
+          |
+          v
++-------------------------------------+
+| Process 1.2 - Load Dashboard        |
++-------------------------------------+
+          |
+          v
++--------------------------------------+
+| Process 1.3 - Fetch & Render        |
+|    Dashboard Data (API)             |
++--------------------------------------+
+          |
+          v
++--------------------------------------+
+| Process 1.4 - Load Attendance Page  |
++--------------------------------------+
           |
           v
 +--------------------------------------------+
-| Process: 1.4 - Fetch & Store Attendance   |
-|      (API & MongoDB Interaction)          |
+| Process 1.5 - Fetch & Store Attendance   |
+|      (API & MongoDB Interaction)         |
 +--------------------------------------------+
-          |                                
-          v                                
+          |
+          v
 +-----------------------------------------+       
-| Process: 1.5 - Load Employees Page      |
+| Process 1.6 - Load Employees Page      |
 +-----------------------------------------+
           |
           v
 +----------------------------------------------+
-| Process: 1.6 - Fetch & Display Employee Data |
+| Process 1.7 - Fetch & Display Employee Data |
 |          (API & MongoDB Interaction)         |
 +----------------------------------------------+
 
 
 
-Explanation:
-•	Process 1.1 (Load Dashboard): When the user navigates to the dashboard, the system loads the UI.
-• Process 1.2 (Fetch & Render Dashboard Data): The system fetches attendance summaries from the Employee API.
-• Process 1.3 (Load Attendance Page): The user navigates to the attendance marking page.
-• Process 1.4 (Fetch & Store Attendance): The system sends attendance data to the Employee API, which updates the MongoDB database.
-• Process 1.5 (Load Employees Page): The user navigates to view employee records.
-• Process 1.6 (Fetch & Display Employee Data): The system retrieves stored attendance records from the Employee API, which fetches data from MongoDB
+####Explanation:
+1. User Authentication
+✔ Process 1.1 - Login / Signup / Logout
+  •  Users sign up (credentials stored in MongoDB).
+  •  Users log in (credentials verified, access granted).
+  •  Users log out (session/token cleared, redirecting to login).
+
+2. Dashboard & Attendance Tracking
+✔ Process 1.2 - Load Dashboard
+  • Displays a summary of attendance for the logged-in user.
+✔ Process 1.3 - Fetch & Render Dashboard Data
+  • Retrieves attendance summaries from the Employee API.
+✔ Process 1.4 - Load Attendance Page
+  • Displays the attendance marking page for the user.
+✔ Process 1.5 - Fetch & Store Attendance
+  • Ensures no duplicate attendance is marked on the same day.
+  • Sends valid attendance data to the Employee API, which updates MongoDB.
 
 
-Data Flow:
-✔ The user interacts with the system.
-✔ The system fetches employee data from the Employee API.
-✔ The API retrieves/sends data to MongoDB for storage.
-✔ Attendance records and employee data are stored and updated in the database
+3. Employee Reports
+✔ Process 1.6 - Load Employees Page
+ • Users can view attendance records of all employees.
+✔ Process 1.7 - Fetch & Display Employee Data
+ • Retrieves attendance records from MongoDB via the Employee API.
+ • Displays data categorized by date & status (Present/Absent).
+
+4. Logout Feature (New Process)
+✔ Process 1.8 - Logout
+ • Clears user session/token to log them out.
+ • Redirects back to the authentication page
 
 
-Additional Notes:
-•	User interacts with the Attendance System to mark attendance and view records.
-• The system fetches & stores data using the Employee API.
-• MongoDB is used to store employee attendance data.
-• Dashboard & Employee Pages fetch data from the API.
-• Attendance Page sends data to the API, which updates the database.
+####Data Flow:
+✔ User logs in/signs up → System verifies credentials via MongoDB.
+✔ Authenticated users access the system → Can mark attendance or view reports.
+✔ User marks attendance → Attendance stored in MongoDB.
+✔ User views attendance records → Fetched via Employee API.
+✔ User logs out → Redirected to login/signup page.
+
+
+####Additional Notes:
+✅ Login & Signup ensure only registered users access the system.
+✅ Attendance marking prevents duplicate entries on the same day.
+✅ MongoDB stores user credentials and attendance records.
+✅ Dashboard & Employee Reports dynamically fetch data via the API.
+✅ Logout clears user sessions and redirects to the login page.

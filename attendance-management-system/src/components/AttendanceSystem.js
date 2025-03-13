@@ -6,33 +6,42 @@ import { useNavigate } from "react-router-dom";
 
 const AttendanceSystem = () => {
   const [user, setUser] = useState("");
+  const [message, setMessage] = useState("");
   const navigate = useNavigate();
 
   // Mark attendance
   const markAttendance = async () => {
     try {
-      await axios.post("http://localhost:5000/attendance", { user });
+      await axios.post("http://localhost:5000/attendance", { user }); // No need to store response
+      setMessage("Attendance marked successfully!");
       setUser("");
-      navigate("/employees"); // Redirect to employees page after marking attendance
+      setTimeout(() => {
+        navigate("/employees");
+      }, 1000);
     } catch (error) {
-      console.error("Error marking attendance", error);
+      if (error.response && error.response.data.error) {
+        setMessage(error.response.data.error);
+      } else {
+        setMessage("Error marking attendance");
+      }
     }
   };
 
   return (
-    <div className="container p-4">
-      <img src={attendanceImage} alt="Attendance" className="attendance-image mb-4" />
-      <h2 className="text-xl font-bold mb-4">Attendance Management System</h2>
+    <div className="attendance-container">
+      <img src={attendanceImage} alt="Attendance" className="attendance-image" />
+      <h2 className="title">Attendance Management System</h2>
       <input
         type="text"
         placeholder="Enter Name"
         value={user}
         onChange={(e) => setUser(e.target.value)}
-        className="border p-2 rounded mb-2"
+        className="input-field"
       />
-      <button onClick={markAttendance} className="bg-blue-500 text-white p-2 rounded ml-2">
+      <button onClick={markAttendance} className="submit-btn">
         Mark Attendance
       </button>
+      {message && <p className="message">{message}</p>}
     </div>
   );
 };
