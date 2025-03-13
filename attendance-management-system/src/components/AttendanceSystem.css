@@ -1,0 +1,77 @@
+/* Attendance System Container */
+.attendance-container {
+  max-width: 500px;
+  margin: 40px auto;
+  padding: 20px;
+  background: white;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+
+/* Attendance Image */
+.attendance-image {
+  width: 100%;
+  height: auto;
+  margin-bottom: 20px;
+  border-radius: 10px;
+}
+
+/* Title */
+.title {
+  font-size: 22px;
+  font-weight: bold;
+  color: #007bff;
+  margin-bottom: 20px;
+}
+
+/* Input Field */
+.input-field {
+  width: 100%;
+  padding: 12px;
+  border: 2px solid #ccc;
+  border-radius: 8px;
+  font-size: 16px;
+  outline: none;
+  transition: border-color 0.3s ease-in-out;
+}
+
+.input-field:focus {
+  border-color: #007bff;
+}
+
+/* Submit Button */
+.submit-btn {
+  background: #007bff;
+  color: white;
+  padding: 12px;
+  width: 100%;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.submit-btn:hover {
+  background: #0056b3;
+}
+
+/* Message Display */
+.message {
+  margin-top: 15px;
+  font-size: 14px;
+  padding: 10px;
+  border-radius: 5px;
+  font-weight: bold;
+}
+
+.message.success {
+  color: #28a745;
+  background: #e9f7ef;
+}
+
+.message.error {
+  color: #dc3545;
+  background: #f8d7da;
+}
